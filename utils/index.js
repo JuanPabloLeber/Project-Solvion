@@ -21,18 +21,15 @@ exports.checkAuth = (req, res, next) => {
           res.json({ err: 'Token not valid 2' })
         }
       })
-    })
-  }
+  })
+}
 
-  exports.checkManager = (req, res, next) => {
-
-
-    employeeModel
-      .findOne({ email: req.body.token.email })
-
+exports.checkManager = (req, res, next) => {
+  employeeModel
+    .findOne({ email: req.body.token.email })
     .then(user => {
       if (user.rol === 'Manager') {
-        res.locals.user = user
+        req.body.user = user
         next()
       } else {
         res.json({ err: 'Token not valid' })
