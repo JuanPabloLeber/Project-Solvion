@@ -21,7 +21,6 @@ exports.updateAction = (req, res) => {
     .findById(req.params.incidenceId)
     .then(incidence => {
       const action = incidence.actions.id(req.params.actionId)
-      console.log(action)
 
       incidence.actions.id(req.params.actionId).done = req.body.done ?? action.done
       incidence.actions.id(req.params.actionId).status = req.body.status ?? action.status
@@ -34,9 +33,22 @@ exports.updateAction = (req, res) => {
         res.status(200).json(incidence)
       })
     })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ msg: 'Error ' })
+    })
 }
 
 exports.getAction = (req, res) => {
   incidencesModel
-    .find()
+    .findById(req.params.incidenceId)
+    .then(incidence => {
+      const action = incidence.actions.id(req.params.actionId)
+      console.log(action)
+      res.status(200).json(action)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ msg: 'Error ' })
+    })
 }
