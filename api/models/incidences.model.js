@@ -35,7 +35,7 @@ const incidenceSchema = new mongoose.Schema({
     required: true
   },
   incidencesCategory: [incidenceCategoriesSchema],
-  actions: [actionSchema],
+  actions: [[actionSchema]],
   client: [clientSchema]
 })
 
