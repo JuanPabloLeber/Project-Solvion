@@ -12,7 +12,7 @@ exports.addIncidenceCategory = (req, res) => {
 
 exports.getIncidenceCategories = (req, res) => {
   incidenceCategoriesModel
-    .find()
+    .find({}, { _id: 1, name: 1 })
     .then(incidenceCategories => res.status(200).json(incidenceCategories))
     .catch(err => {
       console.log(err)
@@ -27,7 +27,7 @@ exports.updateIncidenceCategory = (req, res) => {
       if (incidenceCategory) {
         res.status(200).json({ msg: `The incidence category '${req.body.name}' has been updated!` })
       } else {
-        res.status(404).json({ msg: 'Category incidence not found' })
+        res.status(400).json({ msg: 'Category incidence not found' })
       }
     })
     .catch(err => {

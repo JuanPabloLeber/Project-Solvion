@@ -14,8 +14,6 @@ exports.checkAuth = (req, res, next) => {
       .then(user => {
         if (user) {
           req.body.token = token
-          console.log(req.body)
-          //res.locals.user = user
           next()
         } else {
           res.json({ err: 'Token not valid 2' })
