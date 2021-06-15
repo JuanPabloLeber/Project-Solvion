@@ -6,8 +6,8 @@ const {
   getAction
 } = require('../controllers/action.controllers')
 
-actionRouter.get('/incidences/:incidenceId/:actionId/getAction', getAction)
-actionRouter.post('/incidences/createAction', createAction)
-actionRouter.put('/incidences/:incidenceId/:actionId/updateAction', updateAction)
+actionRouter.get('/incidences/:incidenceId/:actionId', getAction)
+actionRouter.post('/incidences/:technicianId/:incidenceId', createAction)
+actionRouter.put('/incidences/:incidenceId/:actionId', updateAction)
 
 exports.actionRouter = actionRouter

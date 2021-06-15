@@ -54,7 +54,7 @@ exports.updateEmployee = (req, res) => {
 
 exports.deleteEmployee = (req, res) => {
   employeeModel
-    .findOneAndRemove({ email: req.body.email})
+    .findOneAndRemove({ email: req.body.email })
     .then(user => {
       res.status(200).json({ msg: `The user with email: ${user.email}, has been deleted!` })
     })

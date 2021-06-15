@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const incidenceCategoriesSchema = require('./incidencesCategories.model')
-const actionSchema = require('./action.model')
-const clientSchema = require('./clients.model')
+const { incidenceCategoriesSchema } = require('./incidencesCategories.model')
+const { actionSchema } = require('./action.model')
+//const clientSchema = require('./clients.model')
 
 const incidenceSchema = new mongoose.Schema({
   subject: {
@@ -35,8 +35,8 @@ const incidenceSchema = new mongoose.Schema({
     required: true
   },
   incidencesCategory: [incidenceCategoriesSchema],
-  actions: [[actionSchema]],
-  client: [clientSchema]
+  actions: [actionSchema]
+  //client: [clientSchema]
 })
 
 const incidencesModel = mongoose.model('incidences', incidenceSchema)
