@@ -42,10 +42,46 @@ exports.addEmployee = (req, res) => {
     })
 }
 
+exports.getAllEmployees = (req, res) => {
+  employeeModel
+    .find({}, { password: 0, __v: 0 })
+    .then(employees => res.status(200).json(employees))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ msg: 'Error' })
+    })
+}
+
 exports.updateEmployee = (req, res) => {
   employeeModel
-    .findOneAndUpdate({ email: req.body.token.email }, req.body.employee)
-    .then(user => res.status(200).json({ msg: 'Update successful!' }))
+    .findById(req.params.idEmployee)
+    .then(user => {
+      if (req.body.employee.email) {
+        employeeModel
+          .findOne({ email: req.body.employee.email })
+          .then(user => {
+            if (user) res.status(403).json({ msg: 'The email already exists!' })
+          })
+          .catch(err => {
+            console.log(err)
+            res.status(500).json({ msg: 'Error' })
+          })
+      }
+      if (req.body.employee.password) {
+        req.body.employee.password = bcrypt.hashSync(req.body.employee.password, 10)
+      }
+
+      console.log(result)
+      user.save(function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+        else {
+          console.log(result)
+        }
+      })
+      res.status(200).json({ msg: 'Update successful!' })
+    })
     .catch(err => {
       console.log(err)
       res.status(500).json({ msg: 'Error' })
@@ -54,7 +90,7 @@ exports.updateEmployee = (req, res) => {
 
 exports.deleteEmployee = (req, res) => {
   employeeModel
-    .findOneAndRemove({ email: req.body.email})
+    .findOneAndRemove({ email: req.body.email })
     .then(user => {
       console.log('hola')
       res.status(200).json({ msg: `The user with email: ${user.email}, has been deleted!` })

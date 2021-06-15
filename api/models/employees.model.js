@@ -2,19 +2,25 @@ const mongoose = require('mongoose')
 
 const employeeSchema = new mongoose.Schema({
   firstName: {
-    type: String
+    type: String,
+    required: true
   },
   lastName: {
-    type: String
+    type: String,
+    required: true
   },
   email: {
-    type: String
+    type: String,
+    required: true,
+    unique: true
   },
   password: {
-    type: String
+    type: String,
+    required: true
   },
   rol: {
-    type: String
+    type: String,
+    required: true
   },
   specialty: {
     type: Array
