@@ -6,11 +6,11 @@ const {
   getIncidenceCategories,
   updateIncidenceCategory,
   deleteIncidenceCategory
-} = require('../controllers/employees.controller')
+} = require('../controllers/incidenceCategories.controller')
 
-incidenceCategoriesRouter.post('/', addIncidenceCategory)
-incidenceCategoriesRouter.get('/', getIncidenceCategories)
-incidenceCategoriesRouter.put('/', updateIncidenceCategory)
-incidenceCategoriesRouter.delete('/', deleteIncidenceCategory)
+incidenceCategoriesRouter.post('/', checkAuth, checkManager, addIncidenceCategory)
+incidenceCategoriesRouter.get('/', checkAuth, getIncidenceCategories)
+incidenceCategoriesRouter.put('/', checkAuth, checkManager, updateIncidenceCategory)
+incidenceCategoriesRouter.delete('/', checkAuth, checkManager, deleteIncidenceCategory)
 
 exports.incidenceCategoriesRouter = incidenceCategoriesRouter
