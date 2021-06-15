@@ -60,3 +60,16 @@ exports.checkCustomerService = (req, res, next) => {
       }
     })
 }
+
+exports.checkCustomerServiceOrManager = (req, res, next) => {
+  employeeModel
+    .findOne({ email: req.body.token.email })
+    .then(user => {
+      if (user.rol === 'CustomerService' || user.rol === 'Manager') {
+        res.locals.user = user
+        next()
+      } else {
+        res.json({ err: 'Token not valid' })
+      }
+    })
+}

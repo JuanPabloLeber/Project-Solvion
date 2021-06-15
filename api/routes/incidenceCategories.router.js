@@ -1,5 +1,5 @@
 const incidenceCategoriesRouter = require('express').Router()
-const { checkAuth, checkTechnician, checkManager, checkCustomerService } = require('../../utils')
+const { checkAuth, checkManager, checkCustomerServiceOrManager } = require('../../utils')
 
 const {
   addIncidenceCategory,
@@ -9,7 +9,7 @@ const {
 } = require('../controllers/incidenceCategories.controller')
 
 incidenceCategoriesRouter.post('/', checkAuth, checkManager, addIncidenceCategory)
-incidenceCategoriesRouter.get('/', checkAuth, getIncidenceCategories)
+incidenceCategoriesRouter.get('/', checkAuth, checkCustomerServiceOrManager, getIncidenceCategories)
 incidenceCategoriesRouter.put('/', checkAuth, checkManager, updateIncidenceCategory)
 incidenceCategoriesRouter.delete('/', checkAuth, checkManager, deleteIncidenceCategory)
 
