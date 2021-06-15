@@ -56,7 +56,6 @@ exports.deleteEmployee = (req, res) => {
   employeeModel
     .findOneAndRemove({ email: req.body.email})
     .then(user => {
-      console.log('hola')
       res.status(200).json({ msg: `The user with email: ${user.email}, has been deleted!` })
     })
     .catch(err => {
