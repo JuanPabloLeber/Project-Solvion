@@ -10,31 +10,29 @@ exports.login = (req, res) => {
       if (user) {
         bcrypt.compare(req.body.password, user.password, (err, result) => {
           if (!result) {
-            console.log(req.body)
-            return res.json({ error: 'Wrong email or password' })
+            console.log(err)
+            return res.status(403).json({ error: 'Wrong email or password' })
           }
           const user_data = { rol: user.rol, email: user.email }
           const token = jwt.sign(
             user_data,
             process.env.SECRET, // TODO SECRET MORE SECRET PLEASE
             { expiresIn: '1h' }
-            )
-            console.log(token, user_data)
-            return res.json({ token: token, ...user_data })
+          )
+          return res.status(200).json({ token: token, ...user_data })
         })
       } else {
-        return res.json({ error: 'Wrong email or password' })
+        return res.status(403).json({ error: 'Wrong email or password' })
       }
     })
     .catch(err => {
       console.log(err)
-      res.json({ err: 'Error' })
+      res.status(500).json({ err: 'Error' })
     })
 }
 
 exports.whoami = (req, res) => {
-  console.log(req.body.user)
-  res.json({
+  res.status(200).json({
     firstName: req.body.user.firstName,
     lastName: req.body.user.lastName,
     rol: req.body.user.rol,

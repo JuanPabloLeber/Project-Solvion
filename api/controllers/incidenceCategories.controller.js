@@ -22,12 +22,12 @@ exports.getIncidenceCategories = (req, res) => {
 
 exports.updateIncidenceCategory = (req, res) => {
   incidenceCategoriesModel
-    .findByIdAndUpdate(req.body.id, { name: req.body.name })
+    .findByIdAndUpdate(req.params.idIncidenceCategory, { name: req.body.name })
     .then(incidenceCategory => {
       if (incidenceCategory) {
         res.status(200).json({ msg: `The incidence category '${req.body.name}' has been updated!` })
       } else {
-        res.status(400).json({ msg: 'Category incidence not found' })
+        res.status(404).json({ msg: 'Category incidence not found' })
       }
     })
     .catch(err => {

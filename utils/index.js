@@ -16,7 +16,7 @@ exports.checkAuth = (req, res, next) => {
           req.body.token = token
           next()
         } else {
-          res.json({ err: 'Token not valid' })
+          res.status(500).json({ err: 'Token not valid' })
         }
       })
   })
@@ -30,7 +30,7 @@ exports.checkManager = (req, res, next) => {
         req.body.user = user
         next()
       } else {
-        res.json({ err: 'Token not valid' })
+        res.status(500).json({ err: 'Token not valid' })
       }
     })
 }
@@ -43,7 +43,7 @@ exports.checkTechnician = (req, res, next) => {
         res.locals.user = user
         next()
       } else {
-        res.json({ err: 'Token not valid' })
+        res.status(500).json({ err: 'Token not valid' })
       }
     })
 }
@@ -56,7 +56,7 @@ exports.checkCustomerService = (req, res, next) => {
         res.locals.user = user
         next()
       } else {
-        res.json({ err: 'Token not valid' })
+        res.status(500).json({ err: 'Token not valid' })
       }
     })
 }
@@ -69,7 +69,7 @@ exports.checkCustomerServiceOrManager = (req, res, next) => {
         res.locals.user = user
         next()
       } else {
-        res.json({ err: 'Token not valid' })
+        res.status(500).json({ err: 'Token not valid' })
       }
     })
 }
