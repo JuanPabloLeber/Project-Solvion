@@ -7,7 +7,7 @@ exports.checkAuth = (req, res, next) => {
 
   jwt.verify(req.headers.token, process.env.SECRET, (err, token) => {
 
-    if (err) { res.status(403).json({ error: 'Token not valid 1' }) }
+    if (err) { res.status(403).json({ error: 'Token not valid' }) }
 
     employeeModel
       .findOne({ email: token.email })
@@ -16,7 +16,7 @@ exports.checkAuth = (req, res, next) => {
           req.body.token = token
           next()
         } else {
-          res.json({ err: 'Token not valid 2' })
+          res.json({ err: 'Token not valid' })
         }
       })
   })
@@ -66,6 +66,19 @@ exports.checkCustomerServiceOrManager = (req, res, next) => {
     .findOne({ email: req.body.token.email })
     .then(user => {
       if (user.rol === 'CustomerService' || user.rol === 'Manager') {
+        res.locals.user = user
+        next()
+      } else {
+        res.json({ err: 'Token not valid' })
+      }
+    })
+}
+
+exports.checkCustomerServiceOrManagerOrTechnician = (req, res, next) => {
+  employeeModel
+    .findOne({ email: req.body.token.email })
+    .then(user => {
+      if (user.rol === 'CustomerService' || user.rol === 'Manager' || user.rol === 'Technician') {
         res.locals.user = user
         next()
       } else {
