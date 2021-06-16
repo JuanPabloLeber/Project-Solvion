@@ -8,6 +8,4 @@ const incidenceCategoriesSchema = new mongoose.Schema({
   }
 })
 
-const incidenceCategoriesModel = mongoose.model('incidenceCategories', incidenceCategoriesSchema)
-
-exports.incidenceCategoriesModel = incidenceCategoriesModel
+exports.incidenceCategoriesSchema = incidenceCategoriesSchema
