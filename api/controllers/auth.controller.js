@@ -11,7 +11,7 @@ exports.login = (req, res) => {
         bcrypt.compare(req.body.password, user.password, (err, result) => {
           if (!result) {
             console.log(req.body)
-            return res.json({ error: 'Wrong email or password 1' })
+            return res.json({ error: 'Wrong email or password' })
           }
           const user_data = { rol: user.rol, email: user.email }
           const token = jwt.sign(
@@ -23,7 +23,7 @@ exports.login = (req, res) => {
             return res.json({ token: token, ...user_data })
         })
       } else {
-        return res.json({ error: 'Wrong email or password 2' })
+        return res.json({ error: 'Wrong email or password' })
       }
     })
     .catch(err => {

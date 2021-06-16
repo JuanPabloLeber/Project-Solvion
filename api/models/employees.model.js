@@ -20,7 +20,8 @@ const employeeSchema = new mongoose.Schema({
   },
   rol: {
     type: String,
-    required: true
+    required: true,
+    enum: ['Technician', 'CustomerService', 'Manager']
   },
   specialty: {
     type: Array

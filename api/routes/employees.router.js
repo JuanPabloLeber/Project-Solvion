@@ -8,7 +8,7 @@ const {
   getAllEmployees
 } = require('../controllers/employees.controller')
 
-employeesRouter.post('/', addEmployee)
+employeesRouter.post('/', checkAuth, checkManager, addEmployee)
 employeesRouter.put('/:idEmployee', checkAuth, checkManager, updateEmployee)
 employeesRouter.get('/', checkAuth, checkManager, getAllEmployees)
 employeesRouter.delete('/', checkAuth, checkManager, deleteEmployee)
