@@ -3,12 +3,13 @@ const router = require('express').Router()
 const { employeesRouter } = require('./employees.router')
 const { authRouter } = require('./auth.router')
 const { clientsRouter } = require('./clients.router')
-const { actionRouter } = require('./action.router')
+const { incidencesRouter } = require('./incidences.router')
+
 
 router
   .use('/employees', employeesRouter)
   .use('/auth', authRouter)
   .use('/client', clientsRouter)
-  .use('/action', actionRouter)
+  .use('/incidences', incidencesRouter)
 
 exports.router = router

@@ -6,4 +6,5 @@ const incidenceCategoriesSchema = new mongoose.Schema({
   }]
 })
 
-exports.incidenceCategoriesSchema = incidenceCategoriesSchema
+const incidenceCategoriesModel = mongoose.model('incidenceCategories', incidenceCategoriesSchema)
+exports.incidenceCategoriesModel = incidenceCategoriesModel

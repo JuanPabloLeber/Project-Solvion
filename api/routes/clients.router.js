@@ -4,7 +4,7 @@ const {
 listUserIncidences
 } = require('../controllers/clients.controller')
 
-clientsRouter.get('/listUserIncidences', listUserIncidences)
+clientsRouter.get('/', listUserIncidences)
 
 
 exports.clientsRouter = clientsRouter
