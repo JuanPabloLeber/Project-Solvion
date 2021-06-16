@@ -7,7 +7,7 @@ exports.checkAuth = (req, res, next) => {
 
   jwt.verify(req.headers.token, process.env.SECRET, (err, token) => {
 
-    if (err) { res.status(403).json({ error: 'Token not valid 1' }) }
+    if (err) { res.status(403).json({ error: 'Token not valid' }) }
 
     employeeModel
       .findOne({ email: token.email })
@@ -16,7 +16,7 @@ exports.checkAuth = (req, res, next) => {
           req.body.token = token
           next()
         } else {
-          res.json({ err: 'Token not valid 2' })
+          res.json({ err: 'Token not valid' })
         }
       })
   })
