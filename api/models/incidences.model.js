@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { incidenceCategoriesSchema } = require('./incidencesCategories.model')
+
 const { actionSchema } = require('./action.model')
 const { clientSchema } = require('./clients.model')
 
@@ -29,17 +29,17 @@ const incidenceSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  employees: [{
+  Technician: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'employee',
     required: true
-  }],
+  },
   incidenceCategory: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'incidenceCategories',
     required: true
   },
-  incidencesCategory: [incidenceCategoriesSchema],
+
   actions: [actionSchema],
   client: [clientSchema]
 })
