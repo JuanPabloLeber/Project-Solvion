@@ -2,13 +2,28 @@ const { incidencesModel } = require('../models/incidences.model')
 
 exports.listUserIncidences = (req, res) => {
   incidencesModel
-    .find({ client: { email: req.body.email } })
+    .find({ 'client.email': req.params.clientEmail })
     .then(incidences => {
-      const incidencesArray = []
-      incidences.forEach(incidence => {
-        incidencesArray.push([incidence.status, incidence.actions, incidence.timeToSolve])
-      })
-      res.status(200).json(incidencesArray)
+
+      if (incidences[0].client.password === req.params.clientPassword) {
+        console.log(incidences)
+        const incidencesArray = []
+        incidences.forEach((incidence, index) => {
+          incidencesArray[index] = [{ 'status': incidence.status, 'subject': incidence.subject, 'description': incidence.description }]
+          console.log(incidences[0].actions)
+          incidences[0].actions.forEach((element1, index1) => {
+            incidencesArray[index].push({
+              'done': incidences[0].actions[index1].done,
+              'status': incidences[0].actions[index1].status,
+              'startDate': incidences[0].actions[index1].startDate,
+              'finishDate': incidences[0].actions[index1].finishDate,
+            })
+          })
+        })
+        res.status(200).json(incidencesArray)
+      } else {
+        return res.status(401).json({ error: 'Wrong email or password' })
+      }
     })
     .catch(err => {
       console.log(err)

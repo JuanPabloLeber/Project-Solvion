@@ -31,8 +31,7 @@ const incidenceSchema = new mongoose.Schema({
   },
   Technician: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'employee',
-    required: true
+    ref: 'employee'
   },
   incidenceCategory: {
     type: mongoose.Schema.Types.ObjectId,
@@ -41,7 +40,7 @@ const incidenceSchema = new mongoose.Schema({
   },
 
   actions: [actionSchema],
-  client: [clientSchema]
+  client: clientSchema
 })
 
 const incidencesModel = mongoose.model('incidences', incidenceSchema)

@@ -1,11 +1,10 @@
+
 const { incidencesModel } = require('../models/incidences.model')
 
 exports.createIncidence = (req, res) => {
   const day = new Date()
-  const isoDay = day.toISOString()
-  const finishD = new Date(0000,00,00)
+  const finishD = new Date(0)
 
-  console.log(isoDay)
   incidencesModel
     .create({
       subject: req.body.subject,
@@ -14,7 +13,6 @@ exports.createIncidence = (req, res) => {
       priority: ' ',
       startDate: day,
       finishDate: finishD,
-      employees: [],
       incidenceCategory: req.params.incidenceCategory,
       client: {
         firstName: req.body.client.firstName,
@@ -27,6 +25,65 @@ exports.createIncidence = (req, res) => {
     })
     .then(incidence => {
       res.status(200).json(incidence)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ msg: 'Error' })
+    })
+}
+
+exports.getIncidence = (req, res) => {
+  incidencesModel
+    .findById(req.params.incidenceID)
+    .populate('incidenceCategory')
+    .populate('Technician')
+    .then(incidence => {
+      res.status(200).json(incidence)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ msg: 'Error' })
+    })
+}
+
+exports.updateIncidence = (req, res) => {
+  incidencesModel
+    .findById(req.params.incidenceID)
+    .then(incidence => {
+      const copyIncidence = incidence
+      incidence.subject = req.body.subject ?? copyIncidence.subject
+      incidence.description = req.body.description ?? copyIncidence.description
+      incidence.status = req.body.status ?? copyIncidence.status
+      incidence.priority = req.body.priority ?? copyIncidence.priority
+      incidence.startDate = copyIncidence.startDate
+      incidence.finishDate = req.body.finishDate ?? copyIncidence.finishDate
+      incidence.Technician = req.body.Technician ?? copyIncidence.Technician
+      incidence.incidenceCategory = req.params.incidenceCategory ?? copyIncidence.incidenceCategory
+      incidence.actions = copyIncidence.actions
+      incidence.client = copyIncidence.client
+
+      incidence.save(err => {
+        if (err) res.status(500).send(err)
+        res.status(200).json(incidence)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ msg: 'Error' })
+    })
+}
+
+exports.deleteIncidence = (req, res) => {
+  incidencesModel
+    .findByIdAndDelete(req.params.incidenceID, (err) => {
+      if (err) {
+        return ('There was a problem while deleting')
+      } else {
+        return ('Deleting accomplished')
+      }
+    })
+    .then(() => {
+      res.status(200).json('The incidence was deleted')
     })
     .catch(err => {
       console.log(err)

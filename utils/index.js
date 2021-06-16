@@ -74,6 +74,19 @@ exports.checkCustomerServiceOrManager = (req, res, next) => {
     })
 }
 
+exports.checkCustomerServiceOrManagerOrTechnician = (req, res, next) => {
+  employeeModel
+    .findOne({ email: req.body.token.email })
+    .then(user => {
+      if (user.rol === 'CustomerService' || user.rol === 'Manager' || user.rol === 'Technician') {
+        res.locals.user = user
+        next()
+      } else {
+        res.json({ err: 'Token not valid' })
+      }
+    })
+}
+
 exports.isValidEmail = (email) => {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return re.test(String(email).toLowerCase())
