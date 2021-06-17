@@ -6,7 +6,6 @@ const { incidenceCategoriesRouter } = require('./incidenceCategories.router')
 const { clientsRouter } = require('./clients.router')
 const { incidencesRouter } = require('./incidences.router')
 
-
 router
   .use('/employees', employeesRouter)
   .use('/auth', authRouter)

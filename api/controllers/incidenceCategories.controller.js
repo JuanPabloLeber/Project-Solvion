@@ -38,7 +38,7 @@ exports.updateIncidenceCategory = (req, res) => {
 
 exports.deleteIncidenceCategory = (req, res) => {
   incidenceCategoriesModel
-    .findByIdAndRemove(req.body.id)
+    .findByIdAndRemove(req.params.idIncidenceCategory)
     .then(incidenceCategory => res.status(200).json(`The incidence category '${incidenceCategory.name}' has been deleted`))
     .catch(err => {
       console.log(err)

@@ -5,20 +5,20 @@ exports.listUserIncidence = (req, res) => {
     .findById(req.params.id)
     .then(incidence => {
       if (incidence.client.password === req.body.password) {
-        const incidencesArray = [{
+        const incidenceArray = [{
           status: incidence.status,
           subject: incidence.subject,
           description: incidence.description
         }]
         incidence.actions.forEach((element, index) => {
-          incidencesArray.push({
+          incidenceArray.push({
             done: incidence.actions[index].done,
             status: incidence.actions[index].status,
             startDate: incidence.actions[index].startDate,
             finishDate: incidence.actions[index].finishDate
           })
         })
-        res.status(200).json(incidencesArray)
+        res.status(200).json(incidenceArray)
       } else {
         return res.status(401).json({ error: 'Wrong email or password' })
       }
