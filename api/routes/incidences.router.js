@@ -8,11 +8,10 @@ const {
   updateIncidence,
   deleteIncidence,
   createAction,
-  updateAction,
-  getAction
+  updateAction
 } = require('../controllers/incidences.controller')
 
-incidencesRouter.get('/', checkAuth, checkManager, getIncidence)
+incidencesRouter.get('/', checkAuth, checkManager, getAllIncidences)
 incidencesRouter.get('/:incidenceID', getIncidence)
 incidencesRouter.post('/', checkAuth, checkCustomerServiceOrManager, createIncidence)
 incidencesRouter.post('/:incidenceId/technician/:technicianId', checkAuth, checkTechnicianOrManager, createAction)

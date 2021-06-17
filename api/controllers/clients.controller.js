@@ -3,20 +3,19 @@ const { incidencesModel } = require('../models/incidences.model')
 exports.listUserIncidence = (req, res) => {
   incidencesModel
     .findById(req.params.id)
-    .then(incidences => {
-      if (incidences[0].client.password === req.body.client.password) {
-        console.log(incidences)
-        const incidencesArray = []
-        incidences.forEach((incidence, index) => {
-          incidencesArray[index] = [{ 'status': incidence.status, 'subject': incidence.subject, 'description': incidence.description }]
-          console.log(incidences[0].actions)
-          incidences[0].actions.forEach((element1, index1) => {
-            incidencesArray[index].push({
-              'done': incidences[0].actions[index1].done,
-              'status': incidences[0].actions[index1].status,
-              'startDate': incidences[0].actions[index1].startDate,
-              'finishDate': incidences[0].actions[index1].finishDate,
-            })
+    .then(incidence => {
+      if (incidence.client.password === req.body.password) {
+        const incidencesArray = [{
+          status: incidence.status,
+          subject: incidence.subject,
+          description: incidence.description
+        }]
+        incidence.actions.forEach((element, index) => {
+          incidencesArray.push({
+            done: incidence.actions[index].done,
+            status: incidence.actions[index].status,
+            startDate: incidence.actions[index].startDate,
+            finishDate: incidence.actions[index].finishDate
           })
         })
         res.status(200).json(incidencesArray)

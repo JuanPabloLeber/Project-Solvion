@@ -13,13 +13,13 @@ exports.login = (req, res) => {
             console.log(err)
             return res.status(403).json({ error: 'Wrong email or password' })
           }
-          const user_data = { rol: user.rol, email: user.email }
+          const userData = { rol: user.rol, email: user.email }
           const token = jwt.sign(
-            user_data,
+            userData,
             process.env.SECRET, // TODO SECRET MORE SECRET PLEASE
             { expiresIn: '1h' }
           )
-          return res.status(200).json({ token: token, ...user_data })
+          return res.status(200).json({ token: token, ...userData })
         })
       } else {
         return res.status(403).json({ error: 'Wrong email or password' })
@@ -31,7 +31,7 @@ exports.login = (req, res) => {
     })
 }
 
-exports.whoami = (req, res) => {
+exports.profile = (req, res) => {
   res.status(200).json({
     firstName: req.body.user.firstName,
     lastName: req.body.user.lastName,

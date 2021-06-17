@@ -32,7 +32,7 @@ exports.createIncidence = (req, res) => {
     })
 }
 
-exports.getAllIncidence = (req, res) => {
+exports.getAllIncidences = (req, res) => {
   incidencesModel
     .find()
     .populate('incidenceCategory')
@@ -111,7 +111,6 @@ exports.createAction = (req, res) => {
   incidencesModel
     .findById(req.params.incidenceId)
     .then(incidence => {
-      console.log(incidence)
       incidence.actions.push({ technicianId: req.params.technicianId, startDate: day, finishDate: finishD, ...req.body })
       incidence.save(err => {
         if (err) res.status(500).send(err)

@@ -5,7 +5,7 @@ const { isValidEmail } = require('../../utils')
 const { employeeModel } = require('../models/employees.model')
 
 exports.addEmployee = (req, res) => {
-  const hashed_pwd = bcrypt.hashSync(req.body.password, 10)
+  const hashedPwd = bcrypt.hashSync(req.body.password, 10)
   employeeModel
     .findOne({ email: req.body.email })
     .then(user => {
@@ -20,17 +20,17 @@ exports.addEmployee = (req, res) => {
               specialty: req.body.specialty,
               rol: req.body.rol,
               email: req.body.email,
-              password: hashed_pwd
+              password: hashedPwd
             })
             .then(user => {
-              const user_data = { rol: user.rol, email: user.email }
+              const userData = { rol: user.rol, email: user.email }
 
               const token = jwt.sign(
-                user_data,
+                userData,
                 process.env.SECRET, // TODO SECRET MORE SECRET PLEASE
                 { expiresIn: '1h' }
               )
-              return res.json({ token: token, ...user_data })
+              return res.json({ token: token, ...userData })
             })
             .catch(err => {
               console.log(err)

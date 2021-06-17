@@ -8,9 +8,9 @@ const {
   getAllEmployees
 } = require('../controllers/employees.controller')
 
+employeesRouter.get('/', checkAuth, checkManager, getAllEmployees)
 employeesRouter.post('/', addEmployee)
 employeesRouter.put('/:idEmployee', checkAuth, checkManager, updateEmployee)
-employeesRouter.get('/', checkAuth, checkManager, getAllEmployees)
 employeesRouter.delete('/', checkAuth, checkManager, deleteEmployee)
 
 exports.employeesRouter = employeesRouter
