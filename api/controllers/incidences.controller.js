@@ -2,6 +2,7 @@
 const { incidencesModel } = require('../models/incidences.model')
 
 exports.createIncidence = (req, res) => {
+  console.log(req.body)
   const day = new Date()
   const finishD = new Date(0)
 
@@ -106,14 +107,12 @@ exports.deleteIncidence = (req, res) => {
 }
 
 exports.createAction = (req, res) => {
-  const day = new Date()
-  const finishD = new Date(0)
   incidencesModel
     .findById(req.params.incidenceId)
     .then(incidence => {
-      incidence.actions.push({ technicianId: req.params.technicianId, startDate: day, finishDate: finishD, ...req.body })
+      incidence.actions.push({ technicianId: req.params.technicianId, startDate: new Date(), finishDate: new Date(0), ...req.body })
       incidence.save(err => {
-        if (err) res.status(500).send(err)
+        if (err) res.status(500).json({ msg: 'Error'})
         res.status(200).json(incidence)
       })
     })

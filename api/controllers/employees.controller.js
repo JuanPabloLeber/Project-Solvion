@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const { isValidEmail } = require('../../utils')
 
 const { employeeModel } = require('../models/employees.model')
+const { incidencesModel } = require('../models/incidences.model')
 
 exports.addEmployee = (req, res) => {
   const hashedPwd = bcrypt.hashSync(req.body.password, 10)
@@ -94,6 +95,26 @@ exports.deleteEmployee = (req, res) => {
   employeeModel
     .findOneAndRemove({ email: req.body.email })
     .then(user => {
+      if (user.rol === 'Technician') {
+        incidencesModel
+          .updateMany({ Technician: user.id }, { Technician: '' })
+        incidencesModel
+          .find()
+          .then(incidences => {
+            incidences.forEach(incidence => {
+              incidence.actions.forEach(action => {
+                if (action.technicianId.toString() === user.id.toString()) {
+                  action.technicianId = null
+                }
+              })
+              incidence.save(function (err, result) {
+                if (err) {
+                  console.log(err)
+                }
+              })
+            })
+          })
+      }
       res.status(200).json({ msg: `The user with email: ${user.email}, has been deleted!` })
     })
     .catch(err => {
