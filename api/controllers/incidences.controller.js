@@ -13,7 +13,7 @@ exports.createIncidence = (req, res) => {
       priority: ' ',
       startDate: day,
       finishDate: finishD,
-      incidenceCategory: req.params.incidenceCategory,
+      incidenceCategory: req.body.incidenceCategory,
       client: {
         firstName: req.body.client.firstName,
         lastName: req.body.client.lastName,
@@ -23,6 +23,20 @@ exports.createIncidence = (req, res) => {
         address: req.body.client.address
       }
     })
+    .then(incidence => {
+      res.status(200).json(incidence)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ msg: 'Error' })
+    })
+}
+
+exports.getAllIncidence = (req, res) => {
+  incidencesModel
+    .find()
+    .populate('incidenceCategory')
+    .populate('Technician')
     .then(incidence => {
       res.status(200).json(incidence)
     })
@@ -88,5 +102,45 @@ exports.deleteIncidence = (req, res) => {
     .catch(err => {
       console.log(err)
       res.status(500).json({ msg: 'Error' })
+    })
+}
+
+exports.createAction = (req, res) => {
+  const day = new Date()
+  const finishD = new Date(0)
+  incidencesModel
+    .findById(req.params.incidenceId)
+    .then(incidence => {
+      console.log(incidence)
+      incidence.actions.push({ technicianId: req.params.technicianId, startDate: day, finishDate: finishD, ...req.body })
+      incidence.save(err => {
+        if (err) res.status(500).send(err)
+        res.status(200).json(incidence)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ msg: 'Error ' })
+    })
+}
+
+exports.updateAction = (req, res) => {
+  incidencesModel
+    .findById(req.params.incidenceId)
+    .then(incidence => {
+      const action = incidence.actions.id(req.params.actionId)
+      incidence.actions.id(req.params.actionId).done = req.body.done ?? action.done
+      incidence.actions.id(req.params.actionId).status = req.body.status ?? action.status
+      incidence.actions.id(req.params.actionId).startDate = action.startDate
+      incidence.actions.id(req.params.actionId).finishDate = action.finishDate
+      incidence.actions.id(req.params.actionId).technicianId = action.technicianId
+      incidence.save(err => {
+        if (err) res.status(500).send(err)
+        res.status(200).json(incidence)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ msg: 'Error ' })
     })
 }

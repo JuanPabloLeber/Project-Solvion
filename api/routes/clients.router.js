@@ -1,9 +1,9 @@
 const clientsRouter = require('express').Router()
 
 const {
-  listUserIncidences
+  listUserIncidence
 } = require('../controllers/clients.controller')
 
-clientsRouter.get('/clientEmail/:clientEmail/clientPassword/:clientPassword', listUserIncidences)
+clientsRouter.get('/incidenceId/:id/', listUserIncidence)
 
 exports.clientsRouter = clientsRouter

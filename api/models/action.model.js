@@ -20,8 +20,7 @@ const actionSchema = new mongoose.Schema({
   },
   technicianId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'employee',
-    required: true
+    ref: 'employee'
   }
 })
 

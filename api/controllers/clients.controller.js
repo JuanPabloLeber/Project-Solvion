@@ -1,11 +1,10 @@
 const { incidencesModel } = require('../models/incidences.model')
 
-exports.listUserIncidences = (req, res) => {
+exports.listUserIncidence = (req, res) => {
   incidencesModel
-    .find({ 'client.email': req.params.clientEmail })
+    .findById(req.params.id)
     .then(incidences => {
-
-      if (incidences[0].client.password === req.params.clientPassword) {
+      if (incidences[0].client.password === req.body.client.password) {
         console.log(incidences)
         const incidencesArray = []
         incidences.forEach((incidence, index) => {
