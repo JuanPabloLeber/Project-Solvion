@@ -48,6 +48,16 @@ exports.addEmployee = (req, res) => {
     })
 }
 
+exports.getEmployee = (req, res) => {
+  employeeModel
+    .findById(req.params.idEmployee, { password: 0, __v: 0 })
+    .then(employees => res.status(200).json(employees))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ msg: 'Error' })
+    })
+}
+
 exports.getAllEmployees = (req, res) => {
   employeeModel
     .find({}, { password: 0, __v: 0 })
@@ -62,20 +72,20 @@ exports.updateEmployee = (req, res) => {
   employeeModel
     .findById(req.params.idEmployee)
     .then(user => {
-      if (req.body.employee.email) {
-        if (!isValidEmail(req.body.employee.email)) {
+      if (req.body.email) {
+        if (!isValidEmail(req.body.email)) {
           return res.status(409).json({ err: 'Wrong email format' })
         }
       }
-      if (req.body.employee.password) {
-        user.password = bcrypt.hashSync(req.body.employee.password, 10)
+      if (req.body.password) {
+        user.password = bcrypt.hashSync(req.body.password, 10)
       }
 
-      user.firstName = req.body.employee.firstName ?? user.firstName
-      user.lastName = req.body.employee.lastName ?? user.lastName
-      user.specialty = req.body.employee.specialty ?? user.specialty
-      user.email = req.body.employee.email ?? user.email
-      user.rol = req.body.employee.rol ?? user.rol
+      user.firstName = req.body.firstName ?? user.firstName
+      user.lastName = req.body.lastName ?? user.lastName
+      user.specialty = req.body.specialty ?? user.specialty
+      user.email = req.body.email ?? user.email
+      user.rol = req.body.rol ?? user.rol
 
       user.save(function (err, result) {
         if (err) {
@@ -93,7 +103,7 @@ exports.updateEmployee = (req, res) => {
 
 exports.deleteEmployee = (req, res) => {
   employeeModel
-    .findOneAndRemove({ email: req.body.email })
+    .findByIdAndRemove(req.params.idEmployee)
     .then(user => {
       if (user.rol === 'Technician') {
         incidencesModel

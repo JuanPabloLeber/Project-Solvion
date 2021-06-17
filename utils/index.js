@@ -24,7 +24,7 @@ exports.checkManager = (req, res, next) => {
     .findOne({ email: req.body.token.email })
     .then(user => {
       if (user.rol === 'Manager') {
-        req.body.user = user
+        res.locals.user = user
         next()
       } else {
         res.status(500).json({ err: 'Token not valid' })

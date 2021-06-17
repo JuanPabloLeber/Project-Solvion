@@ -10,7 +10,7 @@ const { router } = require('./api/routes')
 mongoose.connect(
   process.env.MONGO_URL || 'mongodb://localhost:27017/',
   {
-    dbName: process.env.MONGODB || 'IMG',
+    dbName: process.env.MONGO_DB || 'IMG',
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

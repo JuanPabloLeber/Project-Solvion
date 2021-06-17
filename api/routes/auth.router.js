@@ -6,7 +6,7 @@ const {
   profile
 } = require('../controllers/auth.controller')
 
-authRouter.get('/whoami', checkAuth, checkCustomerServiceOrManagerOrTechnician, profile)
+authRouter.get('/profile', checkAuth, checkCustomerServiceOrManagerOrTechnician, profile)
 
 authRouter.post('/login', login)
 
