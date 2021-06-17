@@ -105,4 +105,4 @@ Samuel Peña: https://github.com/Samupb<br/>
 | POST   | '/:customerServiceId/:incidenceCategory'     | YES  | Add an incidence        |
 | PUT    | '/:incidenceID'                              | YES  | Update an incidence     |
 | GET    | '/:incidenceID'                              | YES  | Get list of incidences  |
-| DELETE | '/incidenceID/:incid# Proyect-Solvion
+| DELETE | '/incidenceID/:incidenceID                   | YES  | Delete an incidence     |
