@@ -11,6 +11,6 @@ const {
 incidenceCategoriesRouter.post('/', checkAuth, checkManager, addIncidenceCategory)
 incidenceCategoriesRouter.get('/', checkAuth, checkCustomerServiceOrManager, getIncidenceCategories)
 incidenceCategoriesRouter.put('/:idIncidenceCategory', checkAuth, checkManager, updateIncidenceCategory)
-incidenceCategoriesRouter.delete('/', checkAuth, checkManager, deleteIncidenceCategory)
+incidenceCategoriesRouter.delete('/:idIncidenceCategory', checkAuth, checkManager, deleteIncidenceCategory)
 
 exports.incidenceCategoriesRouter = incidenceCategoriesRouter

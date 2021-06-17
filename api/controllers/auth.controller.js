@@ -32,11 +32,12 @@ exports.login = (req, res) => {
 }
 
 exports.whoami = (req, res) => {
+
   res.status(200).json({
-    firstName: req.body.user.firstName,
-    lastName: req.body.user.lastName,
-    rol: req.body.user.rol,
-    email: req.body.user.email,
-    specialty: req.body.user.specialty
+    firstName: res.locals.user.firstName,
+    lastName: res.locals.user.lastName,
+    rol: res.locals.user.rol,
+    email: res.locals.user.email,
+    specialty: res.locals.user.specialty
   })
 }
