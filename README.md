@@ -75,9 +75,9 @@ Samuel Peña: https://github.com/Samupb<br/>
 
 ## CLIENT ENDPOINTS
 
-| METHOD | URL                                                            | AUTH | WHO IS ALLOWED | FUNCTION         |
-|--------|----------------------------------------------------------------|------|:--------------:|------------------|
-| GET    | '/clientEmail/:clientEmail/clientPassword/:clientPassword'     | NO   |       MG       | Get clients list |
+| METHOD | URL                                                            | AUTH | FUNCTION         |
+|--------|----------------------------------------------------------------|------|------------------|
+| GET    | '/clientEmail/:clientEmail/clientPassword/:clientPassword'     | NO   | Get clients list |
 
 ## EMPLOYEES ENDPOINTS
 
@@ -103,7 +103,7 @@ Samuel Peña: https://github.com/Samupb<br/>
 |--------|---------------         |------|----------------|-----------------------------------|
 | POST   | '/'                    | YES  |       MG       | Add an incidence category         |
 | PUT    | '/:idIncidenceCategory | YES  |       MG       | Update an incidence category      |
-| GET    | '/'                    | YES  |    SC & MG     | Get list of incidences categories |
+| GET    | '/'                    | YES  |    CS & MG     | Get list of incidences categories |
 | DELETE | '/'                    | YES  |       MG       | Delete an incidence category      |
 
 ##
