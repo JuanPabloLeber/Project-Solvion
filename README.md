@@ -106,4 +106,6 @@ Samuel Peña: https://github.com/Samupb<br/>
 | GET    | '/:incidenceID'                              | YES  | Get list of incidences  |
 | DELETE | '/incidenceID/:incidenceID                   | YES  | Delete an incidence     |
 
+##
+
 * TEC: Technicians MG: Manager CS: Customer Service
