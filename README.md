@@ -56,8 +56,8 @@ Samuel Peña: https://github.com/Samupb<br/>
 | attachment         | string       |           | YES       |
 | startDate          | date         |           | YES       |
 | finishDate         | date         |           | YES       |
-| technician         | [ objectId]  | employee  | NO        |
-| incidenceCategory  | [ objectId]  |           | NO        |
+| technician         | [ objectId ] | employee  | NO        |
+| incidenceCategory  | [ objectId ] |           | NO        |
 
 
 # INCIDENCES CATEGORIES
