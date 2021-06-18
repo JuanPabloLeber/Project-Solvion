@@ -75,36 +75,36 @@ Samuel Peña: https://github.com/Samupb<br/>
 
 ## CLIENT ENDPOINTS
 
-| METHOD | URL                                                            | AUTH | FUNCTION                    |
-|--------|----------------------------------------------------------------|------|-----------------------------|
-| GET    | '/clientEmail/:clientEmail/clientPassword/:clientPassword'     | NO   | Get clients list            |
+| METHOD | URL                                                            | AUTH | WHO IS ALLOWED | FUNCTION         |
+|--------|----------------------------------------------------------------|------|:--------------:|------------------|
+| GET    | '/clientEmail/:clientEmail/clientPassword/:clientPassword'     | NO   |       MG       | Get clients list |
 
 ## EMPLOYEES ENDPOINTS
 
-| METHOD | URL           | AUTH | FUNCTION           |
-|--------|---------------|------|--------------------|
-| POST   | '/'           | YES  | Create an employee |
-| PUT    | '/:idEmployee | YES  | Update an employee |
-| GET    | '/'           | YES  | Show an employee   |
-| DELETE | '/'           | YES  | Delete an employee |
-
-## INCIDENCES CATEGORIES ENDPOINTS
-
-| METHOD | URL                    | AUTH | FUNCTION                          |
-|--------|---------------         |------|-----------------------------------|
-| POST   | '/'                    | YES  | Add an incidence category         |
-| PUT    | '/:idIncidenceCategory | YES  | Update an incidence category      |
-| GET    | '/'                    | YES  | Get list of incidences categories |
-| DELETE | '/'                    | YES  | Delete an incidence category      |
+| METHOD | URL           | AUTH | WHO IS ALLOWED | FUNCTION          |
+|--------|---------------|------|----------------|-------------------|
+| POST   | '/'           | YES  |       MG       |Create an employee |
+| PUT    | '/:idEmployee | YES  |       MG       |Update an employee |
+| GET    | '/'           | YES  |       MG       |Show an employee   |
+| DELETE | '/'           | YES  |       MG       |Delete an employee |
 
 ## INCIDENCES ENDPOINTS
 
-| METHOD | URL                                          | AUTH | FUNCTION                |
-|--------|----------------------------------------------|------|-------------------------|
-| POST   | '/:customerServiceId/:incidenceCategory'     | YES  | Add an incidence        |
-| PUT    | '/:incidenceID'                              | YES  | Update an incidence     |
-| GET    | '/:incidenceID'                              | YES  | Get list of incidences  |
-| DELETE | '/incidenceID/:incidenceID                   | YES  | Delete an incidence     |
+| METHOD | URL                                          | AUTH | WHO IS ALLOWED | FUNCTION               |
+|--------|----------------------------------------------|------|----------------|------------------------|
+| POST   | '/:customerServiceId/:incidenceCategory'     | YES  |       MG       |Add an incidence        |
+| PUT    | '/:incidenceID'                              | YES  |       MG       |Update an incidence     |
+| GET    | '/:incidenceID'                              | YES  |       MG       |Get list of incidences  |
+| DELETE | '/incidenceID/:incidenceID                   | YES  |       MG       |Delete an incidence     |
+
+## INCIDENCES CATEGORIES ENDPOINTS
+
+| METHOD | URL                    | AUTH | WHO IS ALLOWED | FUNCTION                          |
+|--------|---------------         |------|----------------|-----------------------------------|
+| POST   | '/'                    | YES  |       MG       | Add an incidence category         |
+| PUT    | '/:idIncidenceCategory | YES  |       MG       | Update an incidence category      |
+| GET    | '/'                    | YES  |    SC & MG     | Get list of incidences categories |
+| DELETE | '/'                    | YES  |       MG       | Delete an incidence category      |
 
 ##
 
