@@ -3,6 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const morgan = require('morgan')
+const path = require('path')
 
 const api = express()
 const { router } = require('./api/routes')
@@ -27,6 +28,7 @@ mongoose.connect(
       .use(morgan('dev'))
       .use(cors())
       .use(express.json())
+      .use(express.static(path.join(__dirname, 'public')))
       .use('/api', router)
       .listen(8080, (err) => {
         console.info('\n\n' + '>'.repeat(40))
