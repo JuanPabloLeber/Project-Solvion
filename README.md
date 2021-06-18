@@ -36,14 +36,14 @@ Samuel Peña: https://github.com/Samupb<br/>
 
 ## EMPLOYEES
 
-| KEY         | TYPE         | REFERENCE | REQUIRED  |
-|-------------|--------------|-----------|-----------|
-| firstName   | string       |           | YES       |
-| lastName    | string       |           | YES       |
-| email       | string       |           | YES       |
-| password    | string       |           | YES       |
-| rol         | string       | tec CS MG | YES       |
-| speciality  | array        |           | NO        |
+| KEY         | TYPE         | REFERENCE   | REQUIRED  |
+|-------------|--------------|-------------|-----------|
+| firstName   | string       |             | YES       |
+| lastName    | string       |             | YES       |
+| email       | string       |             | YES       |
+| password    | string       |             | YES       |
+| rol         | string       | TEC, CS, MG | YES       |
+| speciality  | array        |             | NO        |
 
 ## INCIDENCES
 
@@ -68,11 +68,10 @@ Samuel Peña: https://github.com/Samupb<br/>
 
 ## ACTION ENDPOINTS
 
-| METHOD | URL                                       | AUTH | FUNCTION             |
-|--------|-------------------------------------------|------|----------------------|
-| GET    | '/incidences/:incidenceId/:actionId'      | NO   | Show an Action       | 
-| POST   | '/incidences/:technicianId/:incidenceId'  | YES  | Create an Action     |
-| PUT    | '/incidences/:incidenceId/:actionId'      | YES  | Update an Action     |
+| METHOD | URL                                       | AUTH | WHO IS ALLOWED | FUNCTION            |
+|--------|-------------------------------------------|------|:--------------:|---------------------| 
+| POST   | '/incidences/:technicianId/:incidenceId'  | YES  | TEC & MG       | Create an Action    |
+| PUT    | '/incidences/:incidenceId/:actionId'      | YES  | TEC & MG       | Update an Action    |
 
 ## CLIENT ENDPOINTS
 
@@ -106,3 +105,5 @@ Samuel Peña: https://github.com/Samupb<br/>
 | PUT    | '/:incidenceID'                              | YES  | Update an incidence     |
 | GET    | '/:incidenceID'                              | YES  | Get list of incidences  |
 | DELETE | '/incidenceID/:incidenceID                   | YES  | Delete an incidence     |
+
+* TEC: Technicians MG: Manager CS: Customer Service
