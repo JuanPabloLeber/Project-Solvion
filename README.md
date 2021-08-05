@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 With Solvion we got the oportunity to develop our amazing 'Incidences Management Service' our solution against typical problems
-inside a companie where we take part to use our API to improve efficiency and organization.
+inside a company where we take part to use our API to improve efficiency and organization.
 ## TEAM
 
 Solvion has been developed by:
